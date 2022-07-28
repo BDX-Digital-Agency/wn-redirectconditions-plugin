@@ -2,54 +2,43 @@
 
 declare(strict_types=1);
 
-namespace Vdlp\RedirectConditions;
+namespace Bdx\RedirectConditions;
 
 use Backend\Classes\FormTabs;
 use Backend\Widgets\Form;
+use Bdx\RedirectConditions\Models\ConditionParameter;
+use CreativeSizzle\Redirect\Classes\Contracts\RedirectConditionInterface;
+use CreativeSizzle\Redirect\Classes\Contracts\RedirectManagerInterface;
+use CreativeSizzle\Redirect\Controllers\Redirects;
+use CreativeSizzle\Redirect\Models\Redirect;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Event;
-use October\Rain\Foundation\Application;
 use System\Classes\PluginBase;
-use Vdlp\Redirect\Classes\Contracts\RedirectConditionInterface;
-use Vdlp\Redirect\Classes\Contracts\RedirectManagerInterface;
-use Vdlp\Redirect\Controllers\Redirects;
-use Vdlp\Redirect\Models\Redirect;
-use Vdlp\RedirectConditions\Models\ConditionParameter;
+use Winter\Storm\Foundation\Application;
 
 final class Plugin extends PluginBase
 {
     public $require = [
-        'Vdlp.Redirect',
+        'CreativeSizzle.Redirect',
     ];
-
-    public function pluginDetails(): array
-    {
-        return [
-            'name' => 'Redirect Conditions',
-            'description' => 'Allows plugin developers to create Redirect Condition extension plugins.',
-            'author' => 'Van der Let & Partners',
-            'icon' => 'icon-link',
-            'homepage' => 'https://octobercms.com/plugin/vdlp-redirect',
-        ];
-    }
 
     public function register(): void
     {
         Redirect::extend(static function (Redirect $redirect): void {
             $redirect->hasMany['conditionParameters'] = [
                 0 => ConditionParameter::class,
-                'table' => 'vdlp_redirectconditions_condition_parameters',
+                'table' => 'bdx_redirectconditions_condition_parameters',
             ];
 
             $redirect->bindEvent('model.afterSave', static function () use ($redirect): void {
                 /** @var Dispatcher $dispatcher */
                 $dispatcher = resolve(Dispatcher::class);
-                $dispatcher->dispatch('vdlp.redirect.afterRedirectSave', ['redirect' => $redirect]);
+                $dispatcher->dispatch('bdx.redirect.afterRedirectSave', ['redirect' => $redirect]);
             });
         });
 
-        Event::listen('vdlp.redirect.afterRedirectSave', static function (Redirect $redirect): void {
-            if (!Application::getInstance()->runningInBackend()) {
+        Event::listen('bdx.redirect.afterRedirectSave', static function (Redirect $redirect): void {
+            if (! Application::getInstance()->runningInBackend()) {
                 return;
             }
 
@@ -65,13 +54,13 @@ final class Plugin extends PluginBase
 
                 $formValues = array_get(
                     $postData,
-                    sprintf('_VdlpRedirectConditionParameters.%s', $condition->getCode()),
+                    sprintf('_BdxRedirectConditionParameters.%s', $condition->getCode()),
                     []
                 );
 
                 $isEnabled = (bool) array_get(
                     $postData,
-                    sprintf('_VdlpRedirectConditionEnabled.%s', $condition->getCode()),
+                    sprintf('_BdxRedirectConditionEnabled.%s', $condition->getCode()),
                     false
                 );
 
@@ -89,11 +78,11 @@ final class Plugin extends PluginBase
         });
 
         Event::listen('backend.form.extendFields', static function (Form $form): void {
-            if (!$form->getController() instanceof Redirects) {
+            if (! $form->getController() instanceof Redirects) {
                 return;
             }
 
-            if (!($form->model instanceof Redirect)) {
+            if (! ($form->model instanceof Redirect)) {
                 return;
             }
 
@@ -104,7 +93,7 @@ final class Plugin extends PluginBase
                 /** @var RedirectConditionInterface $condition */
                 $condition = resolve($condition);
 
-                $formParentFieldKey = sprintf('_VdlpRedirectConditionEnabled[%s]', $condition->getCode());
+                $formParentFieldKey = sprintf('_BdxRedirectConditionEnabled[%s]', $condition->getCode());
 
                 $form->addFields([
                     $formParentFieldKey => [
@@ -117,7 +106,7 @@ final class Plugin extends PluginBase
 
                 foreach ($condition->getFormConfig() as $formFieldKey => $formField) {
                     $formFieldKey = sprintf(
-                        '_VdlpRedirectConditionParameters[%s][%s]',
+                        '_BdxRedirectConditionParameters[%s][%s]',
                         $condition->getCode(),
                         $formFieldKey
                     );
@@ -136,7 +125,7 @@ final class Plugin extends PluginBase
                 }
             }
 
-            if (!$form->model->exists) {
+            if (! $form->model->exists) {
                 return;
             }
 
@@ -148,9 +137,9 @@ final class Plugin extends PluginBase
 
             /** @var ConditionParameter $conditionParameter */
             foreach ($form->model->getAttribute('conditionParameters') as $conditionParameter) {
-                $data['_VdlpRedirectConditionParameters'][$conditionParameter->getAttribute('condition_code')]
+                $data['_BdxRedirectConditionParameters'][$conditionParameter->getAttribute('condition_code')]
                     = $conditionParameter->getAttribute('parameters');
-                $data['_VdlpRedirectConditionEnabled'][$conditionParameter->getAttribute('condition_code')]
+                $data['_BdxRedirectConditionEnabled'][$conditionParameter->getAttribute('condition_code')]
                     = (bool) $conditionParameter->getAttribute('is_enabled');
             }
 

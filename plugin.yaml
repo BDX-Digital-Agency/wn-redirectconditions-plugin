@@ -1,0 +1,8 @@
+plugin:
+    name: 'bdx.redirectconditions::lang.plugin.name'
+    description: 'bdx.redirectconditions::lang.plugin.description'
+    author: BDX
+    icon: wn-icon-link
+    homepage: 'https://thebdx.com'
+    replaces:
+        Vdlp.RedirectConditions: '<= 1.3.0'

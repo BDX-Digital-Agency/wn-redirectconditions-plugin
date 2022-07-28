@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vdlp\RedirectConditions\Models;
+namespace Bdx\RedirectConditions\Models;
 
-use October\Rain\Database\Model;
-use Vdlp\Redirect\Models\Redirect;
+use CreativeSizzle\Redirect\Models\Redirect;
+use Winter\Storm\Database\Model;
 
 class ConditionParameter extends Model
 {
@@ -13,7 +13,7 @@ class ConditionParameter extends Model
         'redirect' => Redirect::class,
     ];
 
-    protected $table = 'vdlp_redirectconditions_condition_parameters';
+    protected $table = 'bdx_redirectconditions_condition_parameters';
 
     protected $guarded = [];
 

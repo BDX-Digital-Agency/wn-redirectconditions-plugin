@@ -1,26 +1,22 @@
 {
-    "name": "vdlp/oc-redirectconditions-plugin",
-    "description": "Allows developers to create their own Redirect Conditions extension plugins for October CMS.",
+    "name": "bdx/wn-redirect-conditions-plugin",
+    "description": "Allows developers to create their own Redirect Conditions extension plugins for Winter CMS.",
     "license": "GPL-2.0-only",
-    "type": "october-plugin",
+    "type": "winter-plugin",
     "authors": [
         {
             "name": "Van der Let & Partners",
-            "email": "octobercms@vdlp.nl"
+            "email": "octobercms@bdx.nl",
+            "role": "Original Author"
+        },
+        {
+            "name": "Eric Pfeiffer"
         }
     ],
     "require": {
         "php": "^8.0.2",
-        "composer/installers": "^1.0 || ^2.0",
-        "october/system": "^3.0",
-        "vdlp/oc-redirect-plugin": "^3.1"
+        "composer/installers": "^1.0 || ^2.0"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://gateway.octobercms.com"
-        }
-    ],
     "archive": {
         "exclude": [
             ".gitattributes",
@@ -29,5 +25,13 @@
             "tests",
             "phpunit.xml"
         ]
+    },
+    "require-dev": {
+        "laravel/pint": "^1.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }

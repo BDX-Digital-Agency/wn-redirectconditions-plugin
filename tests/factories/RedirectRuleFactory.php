@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vdlp\RedirectConditions\Tests\Factories;
+namespace Bdx\RedirectConditions\Tests\Factories;
 
 use Carbon\Carbon;
-use Vdlp\Redirect\Classes\RedirectRule;
-use Vdlp\Redirect\Models\Redirect;
+use CreativeSizzle\Redirect\Classes\RedirectRule;
+use CreativeSizzle\Redirect\Models\Redirect;
 
 class RedirectRuleFactory
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vdlp\RedirectConditions\Classes;
+namespace Bdx\RedirectConditions\Classes;
 
-use Vdlp\Redirect\Classes\Contracts\RedirectConditionInterface;
-use Vdlp\RedirectConditions\Models\ConditionParameter;
+use Bdx\RedirectConditions\Models\ConditionParameter;
+use CreativeSizzle\Redirect\Classes\Contracts\RedirectConditionInterface;
 
 abstract class Condition implements RedirectConditionInterface
 {

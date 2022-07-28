@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vdlp\RedirectConditions\Updates;
+namespace Bdx\RedirectConditions\Updates;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 
 class CreateTables extends Migration
 {
@@ -24,10 +24,16 @@ class CreateTables extends Migration
             $table->text('parameters')->nullable();
             $table->timestamps();
 
+            if (Schema::hasTable('vdlp_redirect_redirects')) {
+                $redirectsTable = 'vdlp_redirect_redirects';
+            } else {
+                $redirectsTable = 'creativesizzle_redirect_redirects';
+            }
+
             // Foreign keys
             $table->foreign('redirect_id', 'vdlp_redirectconditions_redirect')
                 ->references('id')
-                ->on('vdlp_redirect_redirects')
+                ->on($redirectsTable)
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

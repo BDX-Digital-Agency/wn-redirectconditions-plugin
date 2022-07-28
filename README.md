@@ -1,6 +1,6 @@
 <p align="center">
-	<img height="60px" width="60px" src="https://plugins.vdlp.nl/octobercms/icons/Vdlp.Redirect.svg" >
-	<h1 align="center">Vdlp.RedirectConditions</h1>
+	<img height="60px" width="60px" src="https://plugins.bdx.nl/octobercms/icons/Bdx.Redirect.svg" >
+	<h1 align="center">Bdx.RedirectConditions</h1>
 </p>
 
 <p align="center">
@@ -8,12 +8,12 @@
 </p>
 
 <p align="center">
-	<img src="https://badgen.net/packagist/php/vdlp/oc-redirectconditions-plugin">
-	<img src="https://badgen.net/packagist/license/vdlp/oc-redirectconditions-plugin">
-	<img src="https://badgen.net/packagist/v/vdlp/oc-redirectconditions-plugin/latest">
+	<img src="https://badgen.net/packagist/php/bdx/oc-redirectconditions-plugin">
+	<img src="https://badgen.net/packagist/license/bdx/oc-redirectconditions-plugin">
+	<img src="https://badgen.net/packagist/v/bdx/oc-redirectconditions-plugin/latest">
 	<img src="https://badgen.net/badge/cms/October%20CMS">
 	<img src="https://badgen.net/badge/type/plugin">
-	<img src="https://plugins.vdlp.nl/octobercms/badge/installations.php?plugin=vdlp-redirectconditions">
+	<img src="https://plugins.bdx.nl/octobercms/badge/installations.php?plugin=bdx-redirectconditions">
 </p>
 
 ## What is a Redirect Condition?
@@ -33,10 +33,10 @@ Each redirect condition must have:
 
 ## Requirements
 
-- The `Vdlp.Redirect` plugin.
+- The `Bdx.Redirect` plugin.
 - PHP 7.4 or higher.
 - October CMS 2.1 or higher.
 
 ## Example
 
-This plugin contains an detailed implementation example (plugin). This plugin can be found at [GitHub](https://github.com/vdlp/oc-redirectconditionsexample-plugin).
+This plugin contains an detailed implementation example (plugin). This plugin can be found at [GitHub](https://github.com/bdx/oc-redirectconditionsexample-plugin).
